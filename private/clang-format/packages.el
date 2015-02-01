@@ -21,6 +21,11 @@ which require an initialization must be listed explicitly in the list.")
 (defvar clang-format-excluded-packages '()
   "List of packages to exclude.")
 
+(defun compile-in-projectile-root()
+  (interactive)
+  (compile
+   (format "cd %s;scons clang.debug -j6" (projectile-project-root))))
+
 ;; For each package, define a function clang-format/init-<package-clang-format>
 ;;
 (defun clang-format/init-clang-format ()
@@ -37,7 +42,10 @@ which require an initialization must be listed explicitly in the list.")
     (progn
       (autoload 'projectile-find-other-file "projectile")
       (evil-leader/set-key
-        "oo" 'projectile-find-other-file))))
+        "oo" 'projectile-find-other-file)
+      (evil-leader/set-key
+        "oc" 'compile-in-projectile-root)
+      )))
 ;;
 ;; Often the body of an initialize function uses `use-package'
 ;; For more info on `use-package', see readme:
