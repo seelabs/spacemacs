@@ -42,7 +42,7 @@ the candidate closest to path of the given file."
          ;; rm the common prefix
          (strip-common (p1 p2)
                           (cond
-                           ((not (or p1 p2)) (list (nil nil)))
+                           ((not (or p1 p2)) (list nil nil))
                            ((equalp (car p1) (car p2))
                             (strip-common (cdr p1) (cdr p2)))
                            (t (list p1 p2))))
