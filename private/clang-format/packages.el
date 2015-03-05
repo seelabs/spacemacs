@@ -92,6 +92,10 @@ Other file extensions can be customized with the variable `projectile-other-file
         "oo" 'swd/find-other-file)
       (evil-leader/set-key
         "oc" 'compile-in-projectile-root)
+      (evil-leader/set-key
+        "ows" 'window-configuration-to-register)
+      (evil-leader/set-key
+        "owr" 'jump-to-register)
       )))
 ;;
 ;; Often the body of an initialize function uses `use-package'
