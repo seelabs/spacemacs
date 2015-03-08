@@ -25,7 +25,8 @@
     ;; not up to date
     ;; helm-gist
     magit
-    magit-gh-pulls
+    ;; asks for password too often
+    ;; magit-gh-pulls
     magit-gitflow
     magit-svn
     smeargle
