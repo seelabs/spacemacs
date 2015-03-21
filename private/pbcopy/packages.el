@@ -22,14 +22,11 @@ which require an initialization must be listed explicitly in the list.")
 
 ;; For each package, define a function pbcopy/init-<package-pbcopy>
 ;;
-(defun pbcopy/init-my-package ()
+(defun pbcopy/init-pbcopy ()
   "Initialize my package"
   (use-package pbcopy
-    :defer t
-    :init
-    (evil-leader/set-key
-      "oC" 'turn-on-pbcopy
-      "oV" 'turn-off-pbcopy)))
+    :if (not (display-graphic-p))
+    :init (turn-on-pbcopy)))
 ;;
 ;; Often the body of an initialize function uses `use-package'
 ;; For more info on `use-package', see readme:
