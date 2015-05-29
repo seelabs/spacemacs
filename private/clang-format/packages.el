@@ -23,8 +23,12 @@ which require an initialization must be listed explicitly in the list.")
 
 (defun compile-in-projectile-root()
   (interactive)
-  (compile
-   (format "cd %s;scons clang.debug -j6" (projectile-project-root))))
+  (let* ((project-root (projectile-project-root))
+         (ninja-file (concat project-root "/build.ninja"))
+         (is-ninja (file-exists-p ninja-file))
+         (compile-command (if is-ninja "ninja" "scons clang.debug -j4")))
+    (compile
+     (format "cd %s;%s" project-root compile-command))))
 
 
 (defun swd/best-match (this-file proj-root candidates)
@@ -49,7 +53,7 @@ the candidate closest to path of the given file."
          (path-distance (p1 p2)
                            (let ((l (strip-common p1 p2)))
                              (+ (length (first l)) (length (second l))))))
-    
+
     (let* ((proj-root-path (split-string proj-root "/"))
            (this-path (car (strip-common
                             (dir-path this-file)
